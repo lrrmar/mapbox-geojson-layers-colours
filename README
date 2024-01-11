@@ -1,0 +1,13 @@
+TO RUN
+------
+
+Install python packges: fastapi, bokeh, uvicorn
+
+Run command "uvicorn main:app --reload" and visit http://127.0.0.1:8000
+
+TO VIEW GEOJSON
+---------------
+
+.geojson file to be shown is given in get_geojson function in routes/templates.py
+
+Colour scheme defined for each "level" feature property - edit the variable color_legend in static/map.js and make sure there is a hex colour code given for every level in the file. Open developer tools (Ctl+Shift+J in chrome) and view the console to get hints!

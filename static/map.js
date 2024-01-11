@@ -14,10 +14,16 @@ map.fitBounds([[-3.0, 50.3],[-1.5, 51.5]])
 
 
 const canvas = map.getCanvasContainer();
+// From here: https://venngage.com/tools/accessible-color-palette-generator
+const color_legend = {
+    '0_5': '#00bf7d',
+    '5_10': '#00b4c5',
+    '10_15': '#0073e6',
+    '15_20': '#2546f0',
+    '20_25': '#5928ed;'
+}
 
 map.on('load', () => {
-//Add a geojson point source.
-//Heatmap layers also work with a vector tile source.
     console.log("map loaded");
 
     $.ajax({
@@ -27,36 +33,28 @@ map.on('load', () => {
         contentType: "application/json",
         success: function (returnedData, successStr, jqXHR) {
 
-            wrf_data_overlay = JSON.parse(returnedData);
+            let wrf_data_overlay = returnedData;
             console.log(wrf_data_overlay);
 
-var tileIndex = geojsonvt(wrf_data_overlay);
-console.log(tileIndex);
-console.log(tileIndex.getTile(5,15,10));
-console.log(map.style);
+            for (feat in wrf_data_overlay['features']) {
+                feature = wrf_data_overlay['features'][feat];
+                layer_color = color_legend[feature['properties']['level']]
+                console.log('Level: ', feature['properties']['level']);
+                console.log('Color: ', layer_color);
 
-map.addSource('grid_test', {
-    'type': 'geojson',
-    'data': wrf_data_overlay,
-    'buffer': 0
-});
-
-map.addLayer(
-  {
-        'id': 'grid_test',
-        'type': 'fill',
-        'source': 'grid_test',
-        'paint': {
-            'fill-color': ['interpolate',
-            ['linear'], ['get', 'wa.p.925.6'],
-            -0.1,
-            'rgba(255,0,0,0.4)',
-            0,
-            'rgba(0,0,255,0.4)',
-            0.1,
-            'rgba(0,255,0,0.4)'],
-            'fill-outline-color': 'rgba(0,0,0,0)'
-        }
-    })
-
-}})});
+                map.addSource(feat, {
+                    'type': 'geojson',
+                    'data': feature,
+                    'buffer': 0
+                });
+                
+                map.addLayer({
+                    'id': feat,
+                    'type': 'fill',
+                    'source': feat,
+                    'paint': {
+                        'fill-color': layer_color,
+                        'fill-opacity': 0.4
+                    }
+                });
+}}})});
