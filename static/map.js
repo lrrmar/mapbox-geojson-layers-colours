@@ -3,7 +3,7 @@ const coordinates = document.getElementById('coordinates');
 const map = new mapboxgl.Map({
 	container: 'map',
 	// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-	style: 'mapbox://styles/forceteam/clefkoauc001201qgm91i3kn6',
+	style: 'mapbox://styles/mapbox/satellite-v9',
 	projection: 'mercator',
 	center: [-2.1654, 50.8569],
 	zoom: 7,
