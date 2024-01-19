@@ -3,7 +3,7 @@ const coordinates = document.getElementById('coordinates');
 const map = new mapboxgl.Map({
 	container: 'map',
 	// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-	style: 'mapbox://styles/mapbox/satellite-v9',
+	style: 'mapbox://styles/mapbox/streets-v1',
 	projection: 'mercator',
 	center: [-2.1654, 50.8569],
 	zoom: 7,
@@ -45,16 +45,16 @@ map.on('load', () => {
                 map.addSource(feat, {
                     'type': 'geojson',
                     'data': feature,
-                    'buffer': 0
                 });
                 
                 map.addLayer({
-                    'id': feat,
+                    'id': feat + '_fill',
                     'type': 'fill',
                     'source': feat,
                     'paint': {
                         'fill-color': layer_color,
-                        'fill-opacity': 0.4
+                        'fill-outline-color': 'rgba(0, 0, 0, 0)',
+                        'fill-opacity': 0.4,
                     }
                 });
 }}})});
