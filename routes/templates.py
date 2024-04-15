@@ -25,9 +25,8 @@ def open_page(request: Request):
 
 @router.get("/geojson")
 async def get_geojson():
-    with open("/home/earlmar/ghrepos/lrrmar/mapbox-geojson-layers-colours/static/data/20240111_mdbz/wrfout_d02_2024-01-11_23:00:00_mdbz.geojson", "r") as file:
+    with open("/home/lmar/ghrepos/lrrmar/mapbox-geojson-layers-colours/static/data/grindavik-tracer.nc.geojson", "r") as file:
 
         data = json.load(file)
 
     return data
-

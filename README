@@ -1,7 +1,8 @@
 TO RUN
 ------
 
-Install python packges: fastapi, bokeh, uvicorn
+Install python packges: fastapi, bokeh, uvicorn (pip install -r requirements.txt)
+OR activate geojson-layers venv.
 
 Run command "uvicorn main:app --reload" and visit http://127.0.0.1:8000
 
