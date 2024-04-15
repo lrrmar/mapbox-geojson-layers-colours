@@ -4,7 +4,15 @@ TO RUN
 Install python packges: fastapi, bokeh, uvicorn (pip install -r requirements.txt)
 OR activate geojson-layers venv.
 
-Run command "uvicorn main:app --reload" and visit http://127.0.0.1:8000
+Locally:
+
+Run command "uvicorn main:app --reload --port XXXX" and visit http://127.0.0.1:XXXX
+
+Remotely:
+
+On local machine run 'ssh -L XXXX:localhost:YYYY user@remote'
+
+On remote machine run "uvicorn main:app --reload --port YYYY" and visit http://127.0.0.1:XXXX on local
 
 TO VIEW GEOJSON
 ---------------
