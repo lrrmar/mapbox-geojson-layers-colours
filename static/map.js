@@ -25,15 +25,6 @@ const canvas = map.getCanvasContainer();
 //    '8_10': '#D4F4F8'
 //}
 
-const color_legend = {
-    '0.1_0.5': '#00282E',
-    '0.5_1.0': '#004851',
-    '1.0_2.0': '#006C7A',
-    '2.0_5.0': '#26C6DA',
-    '5.0_10.0': '#00BED6',
-    '10.0_100.0': '#6BEFF9',
-    '8_10': '#D4F4F8'
-}
 
 map.on('load', () => {
     console.log("map loaded");
@@ -46,13 +37,11 @@ map.on('load', () => {
         success: function (returnedData, successStr, jqXHR) {
 
             let wrf_data_overlay = returnedData;
-            console.log(wrf_data_overlay);
+			let colour_palette = wrf_data_overlay['hex_palette'];
 
             for (feat in wrf_data_overlay['features']) {
                 feature = wrf_data_overlay['features'][feat];
-                layer_color = color_legend[feature['properties']['level']]
-                //console.log('Level: ', feature['properties']['level']);
-                //console.log('Color: ', layer_color);
+                layer_color = colour_palette[feature['properties']['level']]
 
                 map.addSource(feat, {
                     'type': 'geojson',
